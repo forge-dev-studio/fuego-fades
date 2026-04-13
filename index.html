@@ -196,7 +196,7 @@
        SECTION HEADER
     ═══════════════════════════════════════ */
     .sec-head {
-      text-align: center; margin-bottom: 60px; position: relative;
+      text-align: center; margin-bottom: 40px; position: relative;
     }
     .sec-head .eyebrow {
       font-family: 'Caveat', cursive; font-size: 1.3rem; color: var(--purple-light);
@@ -217,7 +217,7 @@
        ABOUT
     ═══════════════════════════════════════ */
     .about {
-      padding: 120px clamp(24px, 5vw, 80px); position: relative;
+      padding: 80px clamp(24px, 5vw, 80px); position: relative;
       background: var(--dark);
     }
     .about::before {
@@ -227,7 +227,7 @@
 
     .about-grid {
       max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
     }
 
     .about-text p {
@@ -275,7 +275,7 @@
        SERVICES
     ═══════════════════════════════════════ */
     .services {
-      padding: 120px clamp(24px, 5vw, 80px); position: relative;
+      padding: 80px clamp(24px, 5vw, 80px); position: relative;
       background: var(--darker);
     }
 
@@ -304,7 +304,7 @@
        GALLERY
     ═══════════════════════════════════════ */
     .gallery {
-      padding: 120px clamp(24px, 5vw, 80px); position: relative;
+      padding: 80px clamp(24px, 5vw, 80px); position: relative;
       background: var(--dark);
     }
     .gallery::before {
@@ -348,7 +348,7 @@
        REELS
     ═══════════════════════════════════════ */
     .reels {
-      padding: 120px clamp(24px, 5vw, 80px);
+      padding: 80px clamp(24px, 5vw, 80px);
       background: var(--darker);
     }
 
@@ -385,7 +385,7 @@
        TESTIMONIALS
     ═══════════════════════════════════════ */
     .testimonials {
-      padding: 120px clamp(24px, 5vw, 80px);
+      padding: 80px clamp(24px, 5vw, 80px);
       background: var(--dark);
     }
 
@@ -413,7 +413,7 @@
        CTA
     ═══════════════════════════════════════ */
     .cta {
-      padding: 140px clamp(24px, 5vw, 80px); text-align: center; position: relative;
+      padding: 90px clamp(24px, 5vw, 80px); text-align: center; position: relative;
       background: linear-gradient(135deg, var(--purple-deep) 0%, var(--dark) 50%, var(--darker) 100%);
       overflow: hidden;
     }
@@ -536,6 +536,53 @@
       height: 40px; position: relative; overflow: hidden; z-index: 5;
     }
     .drip-divider svg { width: 100%; height: 100%; display: block; }
+
+    /* ═══════════════════════════════════════
+       SCROLLING TICKER STRIP
+    ═══════════════════════════════════════ */
+    .ticker {
+      background: var(--purple); padding: 10px 0; overflow: hidden; white-space: nowrap;
+      border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .ticker-track {
+      display: inline-flex; animation: tickerScroll 30s linear infinite;
+    }
+    .ticker-track span {
+      font-family: 'Permanent Marker', cursive; font-size: 1rem; color: var(--white-pure);
+      padding: 0 40px; text-transform: uppercase;
+    }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Animated counting stats */
+    .stats-row {
+      display: flex; justify-content: center; gap: clamp(30px, 6vw, 80px); flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Permanent Marker', cursive; font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--purple); line-height: 1;
+      text-shadow: 0 0 20px rgba(139, 92, 246, .4);
+    }
+    .stat-label {
+      font-family: 'Bebas Neue', sans-serif; font-size: .8rem; letter-spacing: .25em;
+      color: var(--gray); margin-top: 6px; display: block;
+    }
+
+    /* Typewriter cursor blink on hero */
+    .hero h1 .cursor {
+      display: inline-block; width: 4px; height: .85em; background: var(--purple);
+      margin-left: 4px; animation: blink 1s step-end infinite; vertical-align: baseline;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Rotate-in for gallery items */
+    .gal-item.reveal { transform: translateY(80px) rotate(3deg) scale(.9); }
+    .gal-item.reveal:nth-child(even) { transform: translateY(80px) rotate(-3deg) scale(.9); }
+    .gal-item.reveal.vis { transform: none; }
   </style>
 </head>
 
@@ -578,6 +625,14 @@
     </div>
   </section>
 
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>FADES</span><span>DESIGNS</span><span>TAPERS</span><span>BEARD WORK</span><span>HOT TOWEL SHAVES</span><span>RAZOR ART</span><span>CUSTOM CUTS</span><span>FUEGO FADES</span>
+      <span>FADES</span><span>DESIGNS</span><span>TAPERS</span><span>BEARD WORK</span><span>HOT TOWEL SHAVES</span><span>RAZOR ART</span><span>CUSTOM CUTS</span><span>FUEGO FADES</span>
+    </div>
+  </div>
+
   <!-- DRIP -->
   <div class="drip-divider"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,0 L1200,0 L1200,10 Q1100,10 1050,30 Q1040,40 1030,30 Q980,10 900,10 Q820,10 780,25 Q770,35 760,25 Q720,10 600,10 Q500,10 460,28 Q450,38 440,28 Q400,10 300,10 Q220,10 180,25 Q170,35 160,25 Q120,10 0,10 Z" fill="#0a0a0f"/></svg></div>
 
@@ -611,6 +666,16 @@
       </div>
     </div>
   </section>
+
+  <!-- STATS -->
+  <div style="background:var(--darker);padding:50px 24px;">
+    <div class="stats-row">
+      <div class="stat reveal d1"><span class="stat-num" data-count="1000">0</span><span class="stat-label" data-es="CORTES Y MAS">CUTS & COUNTING</span></div>
+      <div class="stat reveal d2"><span class="stat-num" data-count="5">0</span><span class="stat-label" data-es="ESTRELLAS">STAR RATING</span></div>
+      <div class="stat reveal d3"><span class="stat-num" data-count="6">0</span><span class="stat-label" data-es="ANOS DE EXPERIENCIA">YEARS EXPERIENCE</span></div>
+      <div class="stat reveal d4"><span class="stat-num" data-count="100">0</span><span class="stat-label" data-es="DISENOS CUSTOM">CUSTOM DESIGNS</span></div>
+    </div>
+  </div>
 
   <!-- DRIP -->
   <div class="drip-divider"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,0 L1200,0 L1200,10 Q1080,10 1020,32 Q1010,42 1000,32 Q940,10 850,10 Q760,10 700,28 Q690,38 680,28 Q620,10 500,10 Q420,10 370,30 Q360,40 350,30 Q290,10 200,10 Q140,10 100,26 Q90,36 80,26 Q40,10 0,10 Z" fill="#050508"/></svg></div>
@@ -719,6 +784,14 @@
       </div>
     </div>
   </section>
+
+  <!-- TICKER 2 -->
+  <div class="ticker" style="background:var(--purple-deep);">
+    <div class="ticker-track" style="animation-direction:reverse;">
+      <span>BOOK NOW</span><span>FUEGO FADES</span><span>(470) 290-5379</span><span>GAINESVILLE GA</span><span>BOOK NOW</span><span>FUEGO FADES</span><span>(470) 290-5379</span><span>GAINESVILLE GA</span>
+      <span>BOOK NOW</span><span>FUEGO FADES</span><span>(470) 290-5379</span><span>GAINESVILLE GA</span><span>BOOK NOW</span><span>FUEGO FADES</span><span>(470) 290-5379</span><span>GAINESVILLE GA</span>
+    </div>
+  </div>
 
   <!-- CTA -->
   <section class="cta" id="book">
@@ -844,6 +917,27 @@
         nav.style.background = 'rgba(5,5,8,.88)';
       }
     }, { passive: true });
+
+    // Animated counter for stats
+    var countObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var target = parseInt(el.dataset.count, 10);
+        var suffix = target >= 100 ? '+' : '';
+        var dur = 1800;
+        var start = performance.now();
+        function tick(now) {
+          var p = Math.min((now - start) / dur, 1);
+          var val = Math.round((1 - Math.pow(1 - p, 3)) * target);
+          el.textContent = val.toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countObs.unobserve(el);
+      });
+    }, { threshold: .5 });
+    document.querySelectorAll('[data-count]').forEach(function(el) { countObs.observe(el); });
   </script>
   <script src="i18n.js"></script>
 </body>
