@@ -134,6 +134,67 @@
     }
 
     a { color: inherit; text-decoration: none; }
+
+    /* ═══════════════════════════════════════
+       PAINT DRIPS -- animated purple drips from section edges
+    ═══════════════════════════════════════ */
+    .drips {
+      position: absolute; top: 0; left: 0; right: 0; height: 120px;
+      pointer-events: none; z-index: 3; overflow: visible;
+    }
+    .drip {
+      position: absolute; top: -4px; width: 6px; border-radius: 0 0 50% 50%;
+      background: var(--purple); opacity: .6;
+      animation: dripFall var(--drip-dur, 3s) ease-in var(--drip-delay, 0s) infinite;
+    }
+    .drip::after {
+      content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+      width: 10px; height: 10px; border-radius: 50%; background: inherit; opacity: .5;
+    }
+
+    @keyframes dripFall {
+      0% { height: 0; opacity: 0; }
+      10% { opacity: .6; }
+      60% { height: var(--drip-h, 80px); opacity: .5; }
+      80% { height: var(--drip-h, 80px); opacity: .3; }
+      100% { height: var(--drip-h, 80px); opacity: 0; }
+    }
+
+    /* Drip variations */
+    .drip-white { background: rgba(255, 255, 255, .12); }
+    .drip-neon { background: var(--neon); opacity: .4; }
+    .drip-glow { background: var(--purple-glow); filter: blur(1px); }
+
+    /* Bottom drips (hanging from section bottoms) */
+    .drips-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+      pointer-events: none; z-index: 3; overflow: visible;
+    }
+    .drips-bottom .drip {
+      top: auto; bottom: -4px; border-radius: 50% 50% 0 0;
+      animation-name: dripHang;
+    }
+    .drips-bottom .drip::after {
+      bottom: auto; top: -8px;
+    }
+
+    @keyframes dripHang {
+      0% { height: 0; opacity: 0; }
+      15% { opacity: .5; }
+      50% { height: var(--drip-h, 60px); opacity: .4; }
+      100% { height: var(--drip-h, 60px); opacity: 0; }
+    }
+
+    /* Splatter dots at drip endpoints */
+    .splat {
+      position: absolute; border-radius: 50%; background: var(--purple); opacity: .15;
+      pointer-events: none;
+      animation: splatPulse 4s ease-in-out infinite;
+    }
+    @keyframes splatPulse {
+      0%, 100% { transform: scale(1); opacity: .15; }
+      50% { transform: scale(1.3); opacity: .08; }
+    }
     img { display: block; max-width: 100%; height: auto; }
 
     /* Focus */
@@ -1034,6 +1095,67 @@
       });
     }, { threshold: .5 });
     document.querySelectorAll('[data-count]').forEach(function(el) { countObs.observe(el); });
+
+    // ══════════════════════════════════════
+    // PAINT DRIPS -- randomly generated on section edges
+    // ══════════════════════════════════════
+    (function() {
+      var sections = document.querySelectorAll('.hero, .about, .services, .gallery, .reels, .testimonials, .cta');
+      var colors = ['var(--purple)', 'var(--purple-light)', 'var(--neon)', 'rgba(255,255,255,.12)', 'var(--purple-glow)'];
+
+      sections.forEach(function(sec) {
+        // Add drips hanging from top of section
+        var topDrips = document.createElement('div');
+        topDrips.className = 'drips';
+        var numTop = 4 + Math.floor(Math.random() * 6);
+        for (var i = 0; i < numTop; i++) {
+          var d = document.createElement('div');
+          d.className = 'drip';
+          d.style.left = (5 + Math.random() * 90) + '%';
+          d.style.width = (3 + Math.random() * 5) + 'px';
+          d.style.setProperty('--drip-h', (30 + Math.random() * 80) + 'px');
+          d.style.setProperty('--drip-dur', (2.5 + Math.random() * 4) + 's');
+          d.style.setProperty('--drip-delay', (Math.random() * 5) + 's');
+          d.style.background = colors[Math.floor(Math.random() * colors.length)];
+          d.style.opacity = (0.2 + Math.random() * 0.4).toFixed(2);
+          topDrips.appendChild(d);
+        }
+        sec.appendChild(topDrips);
+
+        // Add drips from bottom of section
+        var botDrips = document.createElement('div');
+        botDrips.className = 'drips-bottom';
+        var numBot = 3 + Math.floor(Math.random() * 5);
+        for (var j = 0; j < numBot; j++) {
+          var b = document.createElement('div');
+          b.className = 'drip';
+          b.style.left = (5 + Math.random() * 90) + '%';
+          b.style.width = (3 + Math.random() * 5) + 'px';
+          b.style.setProperty('--drip-h', (20 + Math.random() * 60) + 'px');
+          b.style.setProperty('--drip-dur', (3 + Math.random() * 4) + 's');
+          b.style.setProperty('--drip-delay', (Math.random() * 6) + 's');
+          b.style.background = colors[Math.floor(Math.random() * colors.length)];
+          b.style.opacity = (0.15 + Math.random() * 0.35).toFixed(2);
+          botDrips.appendChild(b);
+        }
+        sec.appendChild(botDrips);
+
+        // Add splatter dots at random positions
+        var numSplats = 2 + Math.floor(Math.random() * 4);
+        for (var k = 0; k < numSplats; k++) {
+          var s = document.createElement('div');
+          s.className = 'splat';
+          s.style.left = (10 + Math.random() * 80) + '%';
+          s.style.top = (10 + Math.random() * 80) + '%';
+          var size = 8 + Math.random() * 30;
+          s.style.width = size + 'px';
+          s.style.height = size + 'px';
+          s.style.background = colors[Math.floor(Math.random() * colors.length)];
+          s.style.animationDelay = (Math.random() * 4) + 's';
+          sec.appendChild(s);
+        }
+      });
+    })();
   </script>
   <script src="i18n.js"></script>
 </body>
