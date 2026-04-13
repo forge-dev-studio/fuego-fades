@@ -327,16 +327,48 @@ h4 {
   text-shadow: -3px 3px 0 var(--olive);
 }
 
-.site-nav {
+.site-nav,
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 66px;
-  padding: 0 48px;
-  background: var(--ink);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  padding: 0 clamp(20px, 4vw, 48px);
+  height: 72px;
+  background: rgba(5, 5, 8, .88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(139, 92, 246, .15);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  box-shadow: 0 0 18px rgba(139, 92, 246, .4);
+}
+
+.nav-logo span {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.1rem;
+  color: var(--orange-light);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .nav-link {
@@ -1818,46 +1850,41 @@ h4 {
     display: flex;
   }
 
-  .site-nav {
+  .site-nav, .nav {
     padding: 0 20px;
   }
 
   .nav-links {
     display: none;
-    position: absolute;
-    top: 66px;
+    position: fixed;
+    top: 72px;
     left: 0;
     right: 0;
-    background: var(--ink);
+    background: rgba(5, 5, 8, .96);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: 20px;
-    gap: 16px;
-    border-top: 1px solid rgba(255,255,255,.1);
+    padding: 28px;
+    gap: 20px;
+    border-bottom: 1px solid rgba(139, 92, 246, .15);
   }
 
   .nav-links.open {
     display: flex;
   }
 
-  .nav-brand-text {
+  .nav-brand-text, .nav-logo span {
     display: none;
   }
 
-  .nav-book {
+  .nav-cta {
+    padding: 8px 16px;
     font-size: .75rem;
-    padding: 8px 18px;
   }
 
-  .nav-link,
-  .nav-cta {
-    padding: 1rem 0;
-    font-size: 1.1rem;
-    margin-left: 0;
-  }
-
-  .nav-cta {
-    text-align: center;
-    margin-top: 1rem;
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
   }
 
   .services-grid {
