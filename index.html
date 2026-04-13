@@ -89,12 +89,15 @@
     .nav-toggle { display: none; background: none; border: none; padding: 8px; cursor: pointer; }
     .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); margin: 6px 0; transition: .3s; }
 
+    /* Right group: CTA + hamburger on mobile */
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
     @media (max-width: 768px) {
       .nav-links { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(5,5,8,.96); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); flex-direction: column; padding: 28px; gap: 20px; border-bottom: 1px solid rgba(139,92,246,.15); }
       .nav-links.open { display: flex; }
-      .nav-toggle { display: block; }
+      .nav-toggle { display: flex; flex-direction: column; order: 2; }
       .nav-logo span { display: none; }
-      .nav-cta { padding: 8px 20px; font-size: .8rem; }
+      .nav-cta { padding: 8px 16px; font-size: .75rem; order: 1; }
     }
 
     /* ═══════════════════════════════════════
@@ -616,10 +619,12 @@
       <li><a href="#gallery" data-es="Galeria">Gallery</a></li>
       <li><a href="contact.html" data-es="Contacto">Contact</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <a href="appointments.html" class="nav-cta" data-es="Reservar">Book Now</a>
+    <div class="nav-right">
+      <a href="appointments.html" class="nav-cta" data-es="Reservar">Book Now</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- HERO -->
