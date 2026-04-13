@@ -132,8 +132,8 @@
     }
 
     .hero-logo {
-      width: clamp(220px, 40vw, 380px); height: auto; margin: 0 auto 40px;
-      filter: drop-shadow(0 0 40px rgba(139, 92, 246, .35)) drop-shadow(0 0 80px rgba(139, 92, 246, .15));
+      width: clamp(300px, 55vw, 520px); height: auto; margin: 0 auto 32px;
+      filter: drop-shadow(0 0 50px rgba(139, 92, 246, .4)) drop-shadow(0 0 100px rgba(139, 92, 246, .2));
       animation: logoFloat 6s ease-in-out infinite;
     }
 
@@ -579,6 +579,21 @@
     }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
+    /* MOBILE: auto-activate hover effects on scroll */
+    .gal-item.mobile-active { border-color: var(--purple); transform: scale(1.03); box-shadow: 0 16px 50px rgba(0,0,0,.5), 0 0 30px rgba(139, 92, 246, .2); }
+    .gal-item.mobile-active img { filter: grayscale(0%) contrast(1.05) brightness(1); }
+    .gal-item.mobile-active .glow { opacity: 1; }
+    .gal-item.mobile-active .label { opacity: 1; transform: translateY(0); }
+
+    .svc-card.mobile-active { border-color: rgba(139, 92, 246, .3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+    .svc-card.mobile-active::before { width: 100%; }
+
+    .test-card.mobile-active { border-color: rgba(139, 92, 246, .25); transform: translateY(-4px); }
+
+    .reel-card.mobile-active { border-color: var(--purple); transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 30px rgba(139, 92, 246, .2); }
+    .reel-card.mobile-active img { filter: brightness(1); }
+    .reel-card.mobile-active .reel-play { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+
     /* Rotate-in for gallery items */
     .gal-item.reveal { transform: translateY(80px) rotate(3deg) scale(.9); }
     .gal-item.reveal:nth-child(even) { transform: translateY(80px) rotate(-3deg) scale(.9); }
@@ -859,55 +874,72 @@
       }
     })();
 
-    // Scroll reveal -- observe ALL reveal variants
+    // Scroll reveal -- AGGRESSIVE threshold for mobile
+    var allRevealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip, .splatter-in');
     var revObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) { e.target.classList.add('vis'); revObs.unobserve(e.target); }
       });
-    }, { threshold: 0.06, rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip, .splatter-in').forEach(function(el) { revObs.observe(el); });
+    }, { threshold: 0.01, rootMargin: '0px 0px 0px 0px' });
+    allRevealEls.forEach(function(el) { revObs.observe(el); });
 
-    // Fallback reveal
+    // Fallback for any stragglers
     window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.querySelectorAll('.reveal:not(.vis), .reveal-left:not(.vis), .reveal-right:not(.vis), .reveal-scale:not(.vis), .reveal-flip:not(.vis), .splatter-in:not(.vis)').forEach(function(el) { el.classList.add('vis'); });
-      }, 3000);
+      setTimeout(function() { allRevealEls.forEach(function(el) { el.classList.add('vis'); }); }, 3500);
     });
 
-    // Mouse glow on dark sections
-    document.querySelectorAll('.gallery, .cta, .reels').forEach(function(sec) {
-      sec.addEventListener('mousemove', function(e) {
-        var r = this.getBoundingClientRect();
-        this.style.setProperty('--glow-x', (e.clientX - r.left) + 'px');
-        this.style.setProperty('--glow-y', (e.clientY - r.top) + 'px');
-      });
-    });
+    // MOBILE: Auto-trigger glow/highlight effects on scroll into view (replaces hover)
+    var isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    var interactiveCards = document.querySelectorAll('.gal-item, .svc-card, .test-card, .reel-card');
 
-    // 3D card tilt on mousemove
-    document.querySelectorAll('.svc-card, .gal-item, .test-card, .reel-card').forEach(function(card) {
-      card.addEventListener('mousemove', function(e) {
-        var r = this.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - .5;
-        var y = (e.clientY - r.top) / r.height - .5;
-        this.style.transform = 'perspective(600px) rotateY(' + (x * 10) + 'deg) rotateX(' + (-y * 10) + 'deg) translateY(-6px) scale(1.02)';
-      });
-      card.addEventListener('mouseleave', function() {
-        this.style.transform = '';
-      });
-    });
+    if (isMobile) {
+      var cardObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('mobile-active');
+          } else {
+            e.target.classList.remove('mobile-active');
+          }
+        });
+      }, { threshold: 0.5 });
+      interactiveCards.forEach(function(c) { cardObs.observe(c); });
+    }
 
-    // Scroll-linked parallax skew on service cards
+    // Desktop: Mouse glow + 3D tilt (skip on mobile)
+    if (!isMobile) {
+      document.querySelectorAll('.gallery, .cta, .reels').forEach(function(sec) {
+        sec.addEventListener('mousemove', function(e) {
+          var r = this.getBoundingClientRect();
+          this.style.setProperty('--glow-x', (e.clientX - r.left) + 'px');
+          this.style.setProperty('--glow-y', (e.clientY - r.top) + 'px');
+        });
+      });
+
+      interactiveCards.forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var r = this.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - .5;
+          var y = (e.clientY - r.top) / r.height - .5;
+          this.style.transform = 'perspective(600px) rotateY(' + (x * 10) + 'deg) rotateX(' + (-y * 10) + 'deg) translateY(-6px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', function() { this.style.transform = ''; });
+      });
+    }
+
+    // Scroll-linked effects (both mobile + desktop)
     var svcCards = document.querySelectorAll('.svc-card');
     var lastScroll = 0;
     window.addEventListener('scroll', function() {
       var delta = window.scrollY - lastScroll;
-      var skew = Math.max(-2, Math.min(2, delta * 0.15));
-      svcCards.forEach(function(c) {
-        if (!c.matches(':hover')) c.style.transform = 'skewY(' + skew + 'deg)';
-      });
       lastScroll = window.scrollY;
 
-      // Nav glow intensity on scroll
+      // Skew on desktop only
+      if (!isMobile) {
+        var skew = Math.max(-2, Math.min(2, delta * 0.15));
+        svcCards.forEach(function(c) { if (!c.matches(':hover')) c.style.transform = 'skewY(' + skew + 'deg)'; });
+      }
+
+      // Nav intensity
       var nav = document.getElementById('siteNav');
       if (window.scrollY > 80) {
         nav.style.borderBottomColor = 'rgba(139,92,246,.3)';
