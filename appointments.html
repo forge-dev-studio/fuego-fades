@@ -173,7 +173,7 @@
     }
 
     .vegas-bulb.dim {
-      background: #2a0810;
+      background: #1a0a2e;
       box-shadow: none;
     }
 
@@ -196,7 +196,7 @@
       font-family: 'Permanent Marker', cursive;
       font-size: clamp(2.5rem, 5vw, 4.5rem);
       color: #fff;
-      text-shadow: 0 0 20px var(--orange), 0 0 40px rgba(232, 81, 24, .4);
+      text-shadow: 0 0 20px var(--orange), 0 0 40px rgba(139, 92, 246, .4);
     }
 
     /* SERVICE CARD STYLING */
@@ -404,7 +404,7 @@
       background: var(--ink);
       border: 2px solid var(--orange);
       position: relative;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, .5), 0 0 0 6px rgba(200, 50, 63, .1);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, .5), 0 0 0 6px rgba(139, 92, 246, .1);
       margin: 40px 0;
     }
 
@@ -464,7 +464,7 @@
     .booking-form select:focus {
       outline: none;
       border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(200, 50, 63, .15);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, .15);
     }
 
     .booking-form select option {
@@ -499,7 +499,7 @@
 
     .barber-card input:checked + .bc-inner {
       border-color: var(--orange);
-      background: rgba(200, 50, 63, .12);
+      background: rgba(139, 92, 246, .12);
       transform: translateY(-3px);
     }
 
@@ -639,7 +639,7 @@
   </nav>
 
   <header class="apt-hero">
-    <h1 class="apt-title" data-es="Haz Tu Reservacion">Get on the Books</h1>
+    <h1 class="apt-title" data-es="Haz Tu Reservacion">Book Your Fuego</h1>
     <p class="apt-sub" data-es="CON CITA · LLAMA AL (470) 290-5379">BY APPOINTMENT · CALL (470) 290-5379</p>
   </header>
 
@@ -824,7 +824,7 @@
             <label class="barber-card">
               <input type="radio" name="barber" value="Any">
               <div class="bc-inner">
-                <div class="bc-avatar" style="font-size:.9rem;">EC</div>
+                <div class="bc-avatar" style="font-size:.9rem;">FF</div>
                 <span class="bc-name" data-es="Cualquiera">Any Available</span>
                 <span class="bc-role" data-es="Proximo disponible">Next available</span>
               </div>
@@ -909,7 +909,7 @@
 
   <footer class="footer">
     <div class="footer-logo-row">
-      <p class="footer-tagline">Look Sharp. Cut Elite.</p>
+      <p class="footer-tagline">Every Cut is Fuego.</p>
     </div>
     <span class="footer-brand">FuegoFades</span>
     <div class="footer-socials">
@@ -1000,7 +1000,7 @@
       var time = fd.get('time');
       var name = fd.get('name');
       var phone = fd.get('phone');
-      var lang = localStorage.getItem('ecs-lang') || 'en';
+      var lang = localStorage.getItem('ff-lang') || 'en';
 
       var submitBtn = document.querySelector('.bf-submit');
       submitBtn.textContent = lang === 'es' ? 'ENVIANDO...' : 'SENDING...';
@@ -1023,7 +1023,7 @@
         + 'Date: ' + date + '\n'
         + 'Time: ' + time + '\n'
         + '---\n'
-        + 'From: FuegoFadesStudio.com';
+        + 'From: FuegoFadesBarbershop.com';
       var waUrl = 'https://wa.me/14702905379?text=' + encodeURIComponent(msg);
 
       // 3. Show success state

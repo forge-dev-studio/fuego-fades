@@ -1,12 +1,12 @@
 /* ============================================================
-   ELITE CUTS STUDIO - BARBERSHOP THEME
-   Black + Red + White + Blue
+   FUEGO FADES BARBERSHOP - BARBERSHOP THEME
+   Black + Purple + White -- Graffiti
    ============================================================ */
 
 /* Retro crosshair cursor — site-wide */
 html,
 body {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cline x1='16' y1='4' x2='16' y2='12' stroke='%23c8323f' stroke-width='2'/%3E%3Cline x1='16' y1='20' x2='16' y2='28' stroke='%23c8323f' stroke-width='2'/%3E%3Cline x1='4' y1='16' x2='12' y2='16' stroke='%23c8323f' stroke-width='2'/%3E%3Cline x1='20' y1='16' x2='28' y2='16' stroke='%23c8323f' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%23c8323f'/%3E%3C/svg%3E") 16 16, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cline x1='16' y1='4' x2='16' y2='12' stroke='%238b5cf6' stroke-width='2'/%3E%3Cline x1='16' y1='20' x2='16' y2='28' stroke='%238b5cf6' stroke-width='2'/%3E%3Cline x1='4' y1='16' x2='12' y2='16' stroke='%238b5cf6' stroke-width='2'/%3E%3Cline x1='20' y1='16' x2='28' y2='16' stroke='%238b5cf6' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%238b5cf6'/%3E%3C/svg%3E") 16 16, auto;
 }
 
 a,
@@ -30,21 +30,21 @@ textarea:focus-visible {
 
 /* --- CUSTOM PROPERTIES --- */
 :root {
-  --orange: #c8323f;
-  --orange-deep: #8a1f28;
-  --orange-light: #e63946;
-  --olive: #1e3a6f;
-  --olive-dark: #0f2347;
-  --olive-light: #2c5ba8;
-  --cream: #f5f3ee;
-  --cream-dark: #e8e4da;
-  --cream-light: #faf8f4;
-  --ink: #0a0a0a;
-  --brown: #1a1a1a;
-  --brown-light: #333333;
+  --orange: #8b5cf6;
+  --orange-deep: #6d28d9;
+  --orange-light: #a78bfa;
+  --olive: #1a1a2e;
+  --olive-dark: #0f0f1a;
+  --olive-light: #a78bfa;
+  --cream: #f8f7ff;
+  --cream-dark: #e8e6f0;
+  --cream-light: #faf8ff;
+  --ink: #0a0a0f;
+  --brown: #1a1a2e;
+  --brown-light: #333340;
   --white: #ffffff;
-  --red-barber: #c8323f;
-  --blue-barber: #1e3a6f;
+  --red-barber: #8b5cf6;
+  --blue-barber: #1a1a2e;
 
   /* Transparency helpers */
   --ink-10: rgba(10, 10, 10, 0.1);
@@ -52,22 +52,22 @@ textarea:focus-visible {
   --ink-40: rgba(10, 10, 10, 0.4);
   --ink-60: rgba(10, 10, 10, 0.6);
   --ink-80: rgba(10, 10, 10, 0.8);
-  --orange-20: rgba(200, 50, 63, 0.2);
-  --orange-10: rgba(200, 50, 63, 0.1);
-  --olive-20: rgba(30, 58, 111, 0.2);
-  --olive-10: rgba(30, 58, 111, 0.1);
+  --orange-20: rgba(139, 92, 246, 0.2);
+  --orange-10: rgba(139, 92, 246, 0.1);
+  --olive-20: rgba(26, 26, 46, 0.2);
+  --olive-10: rgba(26, 26, 46, 0.1);
 
   --shadow-soft: 0 4px 30px rgba(10, 10, 10, 0.12);
   --shadow-card: 0 8px 40px rgba(10, 10, 10, 0.15);
-  --shadow-glow: 0 0 40px rgba(200, 50, 63, 0.12);
+  --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.12);
   --radius-xs: 8px;
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 32px;
   --radius-xl: 48px;
-  --font-display: 'Cooper Black', 'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-display: 'Permanent Marker', cursive;
   --font-heading: 'Bebas Neue', 'Arial Black', sans-serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-body: 'Rajdhani', -apple-system, sans-serif;
   --max-w: 1200px;
   --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-smooth: 400ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -288,7 +288,7 @@ h4 {
   background: rgba(244, 239, 227, 0.92);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
   backdrop-filter: blur(20px) saturate(1.6);
-  box-shadow: 0 2px 30px rgba(34, 31, 27, 0.1);
+  box-shadow: 0 2px 30px rgba(10, 10, 15, 0.1);
   padding: 0.5rem 0;
 }
 
@@ -330,7 +330,13 @@ h4 {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  height: 66px;
+  padding: 0 48px;
+  background: var(--ink);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .nav-link {
@@ -381,13 +387,72 @@ h4 {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-  box-shadow: 0 4px 20px rgba(255, 97, 25, 0.25);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
 }
 
 .nav-cta:hover {
   background: var(--orange-deep);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 97, 25, 0.35);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.35);
+}
+
+/* Nav brand (unified across pages) */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--orange);
+  box-shadow: 0 2px 12px rgba(139, 92, 246, .4);
+}
+
+.nav-brand-text {
+  font-family: var(--font-heading);
+  letter-spacing: 3px;
+  font-size: 1rem;
+  color: var(--orange);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: .85rem;
+  letter-spacing: .2em;
+  color: rgba(255, 255, 255, .55);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.nav-book {
+  font-family: var(--font-heading);
+  font-size: .85rem;
+  letter-spacing: .2em;
+  padding: 9px 26px;
+  background: var(--orange);
+  color: #fff;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.nav-book:hover {
+  background: var(--orange-deep);
 }
 
 /* Hamburger */
@@ -397,6 +462,15 @@ h4 {
   gap: 5px;
   padding: 10px;
   z-index: 10;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  margin: 5px 0;
+  transition: transform .3s, opacity .3s;
 }
 
 .hamburger-line {
@@ -443,20 +517,20 @@ h4 {
   background: var(--orange);
   color: var(--white);
   padding: 0.85rem 1.8rem;
-  box-shadow: 0 6px 25px rgba(255, 97, 25, 0.25);
+  box-shadow: 0 6px 25px rgba(139, 92, 246, 0.25);
 }
 
 .btn-primary:hover {
   background: var(--orange-deep);
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(255, 97, 25, 0.35);
+  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.35);
 }
 
 .btn-olive {
   background: var(--olive);
   color: var(--white);
   padding: 0.85rem 1.8rem;
-  box-shadow: 0 6px 25px rgba(152, 162, 90, 0.25);
+  box-shadow: 0 6px 25px rgba(26, 26, 46, 0.25);
 }
 
 .btn-olive:hover {
@@ -591,7 +665,7 @@ h4 {
   align-items: center;
   gap: 0.6rem;
   padding: 0.8rem 1.2rem;
-  background: rgba(34, 31, 27, 0.85);
+  background: rgba(10, 10, 15, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -667,7 +741,7 @@ h4 {
 .service-card-shine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 40%, rgba(255, 97, 25, 0.04) 50%, transparent 60%);
+  background: linear-gradient(135deg, transparent 40%, rgba(139, 92, 246, 0.04) 50%, transparent 60%);
   opacity: 0;
   transition: opacity var(--transition-smooth);
   pointer-events: none;
@@ -719,7 +793,7 @@ h4 {
 
 .card-featured {
   border-color: var(--olive-20);
-  background: linear-gradient(180deg, rgba(152, 162, 90, 0.06) 0%, var(--white) 100%);
+  background: linear-gradient(180deg, rgba(26, 26, 46, 0.06) 0%, var(--white) 100%);
 }
 
 .card-cta {
@@ -1051,7 +1125,7 @@ h4 {
 }
 
 .testimonial-card:hover {
-  border-color: rgba(255, 97, 25, 0.3);
+  border-color: rgba(139, 92, 246, 0.3);
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
@@ -1124,8 +1198,8 @@ h4 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 50%, rgba(152, 162, 90, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 97, 25, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 30% 50%, rgba(26, 26, 46, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 40%),
     var(--white);
 }
 
@@ -1464,7 +1538,7 @@ h4 {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--orange);
-  box-shadow: 0 0 0 3px rgba(255, 97, 25, 0.12);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
 }
 
 .form-group textarea {
@@ -1745,23 +1819,33 @@ h4 {
   }
 
   .site-nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    bottom: 0;
-    width: 300px;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 5rem 2rem 2rem;
-    background: rgba(244, 239, 227, 0.98);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
-    transition: right var(--transition-smooth);
+    padding: 0 20px;
   }
 
-  .site-nav.is-open {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 66px;
+    left: 0;
     right: 0;
+    background: var(--ink);
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-brand-text {
+    display: none;
+  }
+
+  .nav-book {
+    font-size: .75rem;
+    padding: 8px 18px;
   }
 
   .nav-link,
@@ -2033,7 +2117,7 @@ h4 {
 
 .gallery-strips-item-wrapper {
   overflow: visible !important;
-  background-color: #1e3a6f !important;
+  background-color: #1a1a2e !important;
   /* Olive green */
   border-radius: 4px;
   position: relative;
@@ -2060,7 +2144,7 @@ h4 {
 /* Hover effects */
 .gallery-strips-item:hover .gallery-strips-item-wrapper {
   transform: scale(0.9);
-  background-color: #0f2347 !important;
+  background-color: #0f0f1a !important;
   /* Olive dark */
 }
 
@@ -2076,14 +2160,14 @@ h4 {
   background-color: #dbdbdb !important;
 }
 
-/* 3. Branding Overrides (Cooper Black) */
+/* 3. Branding Overrides (Permanent Marker) */
 #site-title,
 .header-title-text a {
-  font-family: 'Cooper Black', sans-serif !important;
+  font-family: 'Permanent Marker', sans-serif !important;
   font-weight: 900 !important;
   font-style: italic !important;
-  color: #c8323f !important;
-  text-shadow: -2px 2px 0 #1e3a6f !important;
+  color: #8b5cf6 !important;
+  text-shadow: -2px 2px 0 #1a1a2e !important;
   letter-spacing: -0.02em !important;
 }
 
@@ -2160,10 +2244,10 @@ h4 {
   width: 95vw !important;
   max-width: 1800px !important;
   margin: 0 auto !important;
-  border: 22px solid #c8323f;
+  border: 22px solid #8b5cf6;
   border-radius: 16px;
   box-shadow: 0 50px 150px rgba(0, 0, 0, 0.7),
-    0 0 0 14px #1e3a6f;
+    0 0 0 14px #1a1a2e;
   overflow: hidden;
   position: relative;
 }
@@ -2225,22 +2309,22 @@ h4 {
   justify-content: center;
   width: 50px;
   height: 50px;
-  color: #c8323f;
+  color: #8b5cf6;
   filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.2));
 }
 
 .price-dots {
   flex-grow: 1;
-  border-bottom: 3px dotted rgba(30, 58, 111, 0.3);
+  border-bottom: 3px dotted rgba(26, 26, 46, 0.3);
   margin: 0 15px;
   position: relative;
   top: -5px;
 }
 
-/* 4. Improved Cooper Black Header Shadow */
+/* 4. Improved Permanent Marker Header Shadow */
 .vhdr-h {
-  font-family: 'Cooper Black', sans-serif !important;
-  text-shadow: -4px 4px 0px #c8323f, -8px 8px 0px rgba(30, 58, 111, 0.3) !important;
+  font-family: 'Permanent Marker', sans-serif !important;
+  text-shadow: -4px 4px 0px #8b5cf6, -8px 8px 0px rgba(26, 26, 46, 0.3) !important;
   letter-spacing: -0.03em !important;
   line-height: 0.9 !important;
 }
@@ -2248,7 +2332,7 @@ h4 {
 /* 5. Rainbow Accent Stripe */
 .rainbow-strip {
   height: 14px;
-  background: linear-gradient(90deg, #c8323f 25%, #1e3a6f 25% 50%, #f5f3ee 50% 75%, #0a0a0a 75%);
+  background: linear-gradient(90deg, #8b5cf6 25%, #1a1a2e 25% 50%, #f5f3ee 50% 75%, #0a0a0a 75%);
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
