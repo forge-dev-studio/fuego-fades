@@ -145,28 +145,12 @@
 
     .drip-svg {
       position: absolute; top: 0;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .3));
-      animation: dripSlide var(--d-dur, 4s) cubic-bezier(.4, 0, .2, 1) var(--d-delay, 0s) both;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .2));
     }
 
-    @keyframes dripSlide {
-      0% { clip-path: inset(0 0 100% 0); opacity: 0; }
-      5% { opacity: var(--d-opacity, .5); }
-      40% { clip-path: inset(0 0 10% 0); }
-      100% { clip-path: inset(0 0 0% 0); opacity: var(--d-opacity, .5); }
-    }
-
-    /* Splatter -- irregular spray dots */
-    .spray {
-      position: absolute; pointer-events: none; z-index: 2;
-    }
+    /* Splatter -- static spray dots, no animation */
     .spray-dot {
-      position: absolute; border-radius: 50%;
-      animation: sprayFade 6s ease-in-out infinite;
-    }
-    @keyframes sprayFade {
-      0%, 100% { opacity: var(--sp-o, .2); transform: scale(1); }
-      50% { opacity: calc(var(--sp-o, .2) * 0.5); transform: scale(1.15); }
+      position: absolute; border-radius: 50%; pointer-events: none;
     }
 
     /* Static paint streak marks */
@@ -242,23 +226,16 @@
                   var(--darker);
     }
 
-    /* Spray paint splatter */
+    /* Static ambient glow -- no animation for performance */
     .hero::before {
-      content: ''; position: absolute; top: -10%; right: -10%; width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(139, 92, 246, .15) 0%, transparent 70%);
-      border-radius: 50%; filter: blur(80px); pointer-events: none;
-      animation: breathe 8s ease-in-out infinite;
+      content: ''; position: absolute; top: -10%; right: -10%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(139, 92, 246, .12) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none;
     }
     .hero::after {
-      content: ''; position: absolute; bottom: -15%; left: -5%; width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(217, 70, 239, .1) 0%, transparent 70%);
-      border-radius: 50%; filter: blur(60px); pointer-events: none;
-      animation: breathe 8s ease-in-out infinite 4s;
-    }
-
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: .7; }
+      content: ''; position: absolute; bottom: -15%; left: -5%; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(217, 70, 239, .08) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none;
     }
 
     .hero-inner {
@@ -267,13 +244,14 @@
 
     .hero-logo {
       width: clamp(300px, 55vw, 520px); height: auto; margin: 0 auto 32px;
-      filter: drop-shadow(0 0 50px rgba(139, 92, 246, .4)) drop-shadow(0 0 100px rgba(139, 92, 246, .2));
-      animation: logoFloat 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 40px rgba(139, 92, 246, .3));
+      animation: logoFloat 8s ease-in-out infinite;
+      will-change: transform;
     }
 
     @keyframes logoFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-12px) rotate(-1deg); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     .hero-tag {
@@ -593,11 +571,11 @@
 
     /* Base reveal -- everything starts invisible and off-stage */
     .reveal {
-      opacity: 0; transform: translateY(60px) scale(.95);
-      transition: opacity 1.4s cubic-bezier(.16, 1, .3, 1), transform 1.4s cubic-bezier(.16, 1, .3, 1), filter 1.2s ease;
-      filter: blur(4px);
+      opacity: 0; transform: translateY(50px);
+      transition: opacity 1.2s cubic-bezier(.16, 1, .3, 1), transform 1.2s cubic-bezier(.16, 1, .3, 1);
+      will-change: opacity, transform;
     }
-    .reveal.vis { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); filter: blur(0); }
+    .reveal.vis { opacity: 1; transform: none; }
 
     /* Stagger cascade */
     .reveal.d1 { transition-delay: .08s; }
@@ -608,36 +586,24 @@
     .reveal.d6 { transition-delay: .48s; }
 
     /* Different reveal flavors */
-    .reveal-left { opacity: 0; transform: translateX(-80px) rotate(-2deg); filter: blur(4px); transition: all 1.4s cubic-bezier(.16, 1, .3, 1); }
-    .reveal-right { opacity: 0; transform: translateX(80px) rotate(2deg); filter: blur(4px); transition: all 1.4s cubic-bezier(.16, 1, .3, 1); }
-    .reveal-scale { opacity: 0; transform: scale(.7); filter: blur(6px); transition: all 1.5s cubic-bezier(.16, 1, .3, 1); }
-    .reveal-flip { opacity: 0; transform: perspective(800px) rotateX(20deg) translateY(40px); filter: blur(3px); transition: all 1.4s cubic-bezier(.16, 1, .3, 1); }
+    .reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 1.2s cubic-bezier(.16, 1, .3, 1), transform 1.2s cubic-bezier(.16, 1, .3, 1); will-change: opacity, transform; }
+    .reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 1.2s cubic-bezier(.16, 1, .3, 1), transform 1.2s cubic-bezier(.16, 1, .3, 1); will-change: opacity, transform; }
+    .reveal-scale { opacity: 0; transform: scale(.8); transition: opacity 1.3s cubic-bezier(.16, 1, .3, 1), transform 1.3s cubic-bezier(.16, 1, .3, 1); will-change: opacity, transform; }
+    .reveal-flip { opacity: 0; transform: perspective(800px) rotateX(15deg) translateY(30px); transition: opacity 1.2s cubic-bezier(.16, 1, .3, 1), transform 1.2s cubic-bezier(.16, 1, .3, 1); will-change: opacity, transform; }
     .reveal-left.vis, .reveal-right.vis, .reveal-scale.vis, .reveal-flip.vis {
-      opacity: 1; transform: none; filter: blur(0);
+      opacity: 1; transform: none;
     }
 
-    /* Spray paint splatter animation on section entry */
-    .splatter-in {
-      position: relative;
-    }
-    .splatter-in::after {
-      content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
-      background: radial-gradient(circle, rgba(139, 92, 246, .12) 0%, transparent 70%);
-      border-radius: 50%; transform: translate(-50%, -50%); transition: width 1.2s ease, height 1.2s ease;
-      pointer-events: none; z-index: 0;
-    }
-    .splatter-in.vis::after { width: 800px; height: 800px; }
+    .splatter-in { position: relative; }
 
     /* Horizontal scroll-linked skew on cards */
     .svc-card { transition: all .35s, transform .6s cubic-bezier(.16, 1, .3, 1); }
     .gal-item { transition: all .4s cubic-bezier(.16, 1, .3, 1); }
 
-    /* Neon flicker on section headers */
-    @keyframes neonFlicker {
-      0%, 19%, 21%, 53%, 55%, 100% { opacity: 1; text-shadow: 3px 3px 0 rgba(0,0,0,.4), 0 0 30px rgba(139, 92, 246, .3), 0 0 60px rgba(139, 92, 246, .15); }
-      20%, 54% { opacity: .85; text-shadow: 3px 3px 0 rgba(0,0,0,.4), 0 0 10px rgba(139, 92, 246, .1); }
+    /* Static neon glow on section headers -- no infinite animation */
+    .sec-head.vis h2 {
+      text-shadow: 3px 3px 0 rgba(0,0,0,.4), 0 0 30px rgba(139, 92, 246, .25), 0 0 60px rgba(139, 92, 246, .1);
     }
-    .sec-head.vis h2 { animation: neonFlicker 4s ease-in-out infinite; }
 
     /* Drip paint decoration lines between sections */
     .drip-divider {
@@ -865,14 +831,10 @@
     </div>
     <div class="reels-row">
       <div class="reel-frame reveal d1">
-        <video autoplay muted loop playsinline>
-          <source src="assets/reel1.mp4" type="video/mp4">
-        </video>
+        <video muted loop playsinline preload="none" data-src="assets/reel1.mp4"></video>
       </div>
       <div class="reel-frame reveal d2">
-        <video autoplay muted loop playsinline>
-          <source src="assets/reel2.mp4" type="video/mp4">
-        </video>
+        <video muted loop playsinline preload="none" data-src="assets/reel2.mp4"></video>
       </div>
     </div>
   </section>
@@ -1077,6 +1039,21 @@
     }, { threshold: .5 });
     document.querySelectorAll('[data-count]').forEach(function(el) { countObs.observe(el); });
 
+    // Lazy-load videos on scroll into view
+    var vidObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        var v = e.target;
+        if (!v.src && v.dataset.src) {
+          v.src = v.dataset.src;
+          v.load();
+          v.play().catch(function(){});
+        }
+        vidObs.unobserve(v);
+      });
+    }, { rootMargin: '200px' });
+    document.querySelectorAll('video[data-src]').forEach(function(v) { vidObs.observe(v); });
+
     // ══════════════════════════════════════
     // REALISTIC PAINT DRIPS -- SVG paths with organic shapes
     // ══════════════════════════════════════
@@ -1133,7 +1110,7 @@
         var container = document.createElement('div');
         container.className = 'drip-container';
 
-        var numDrips = 3 + Math.floor(Math.random() * 4);
+        var numDrips = 2 + Math.floor(Math.random() * 2);
         for (var i = 0; i < numDrips; i++) {
           var c = purples[Math.floor(Math.random() * purples.length)];
           var w = 6 + Math.random() * 10;
@@ -1170,7 +1147,7 @@
         var spray = document.createElement('div');
         spray.className = 'spray';
         spray.style.cssText = 'position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden;';
-        var numDots = 6 + Math.floor(Math.random() * 10);
+        var numDots = 3 + Math.floor(Math.random() * 4);
         for (var j = 0; j < numDots; j++) {
           var dot = document.createElement('div');
           dot.className = 'spray-dot';
@@ -1183,7 +1160,7 @@
         sec.appendChild(spray);
 
         // Subtle paint streaks across sections
-        var numStreaks = 1 + Math.floor(Math.random() * 2);
+        var numStreaks = Math.round(Math.random());
         for (var m = 0; m < numStreaks; m++) {
           var streak = document.createElement('div');
           streak.className = 'streak';
