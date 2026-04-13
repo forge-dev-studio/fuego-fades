@@ -445,7 +445,7 @@
       background: var(--card);
     }
     .reel-frame:hover { border-color: var(--purple); transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 30px rgba(139, 92, 246, .2); }
-    .reel-frame iframe { display: block; border: none; }
+    .reel-frame video, .reel-frame iframe { display: block; border: none; width: 267px; height: 476px; object-fit: cover; }
 
     /* ═══════════════════════════════════════
        TESTIMONIALS
@@ -823,18 +823,14 @@
     </div>
     <div class="reels-row">
       <div class="reel-frame reveal d1">
-        <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F877283478172449%2F&show_text=false&width=267&t=0&autoplay=true&muted=true&loop=true"
-          title="Fuego Fades - Barbering Reel 1"
-          width="267" height="476" scrolling="no" frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowfullscreen="true"></iframe>
+        <video autoplay muted loop playsinline>
+          <source src="assets/reel1.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="reel-frame reveal d2">
-        <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F61585323092499%2Fvideos%2F880977524451130%2F&show_text=false&width=267&t=0&autoplay=true&muted=true&loop=true"
-          title="Fuego Fades - Barbering Reel 2"
-          width="267" height="476" scrolling="no" frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowfullscreen="true"></iframe>
+        <video autoplay muted loop playsinline>
+          <source src="assets/reel2.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
