@@ -1113,12 +1113,13 @@
           var cpY = (pts[j-1].y + pts[j].y) / 2;
           d += 'C' + pts[j-1].xl + ',' + cpY + ' ' + pts[j].xl + ',' + cpY + ' ' + pts[j].xl + ',' + pts[j].y + ' ';
         }
-        // Bottom bulb (paint collecting at tip)
-        var bx = hw;
-        var by = h - w * 0.4;
-        var br = w * 0.55 + Math.random() * 2;
-        d += 'Q' + (bx - br) + ',' + (by + br * 1.5) + ' ' + bx + ',' + (h) + ' ';
-        d += 'Q' + (bx + br) + ',' + (by + br * 1.5) + ' ' + pts[pts.length-1].xr + ',' + pts[pts.length-1].y + ' ';
+        // Bottom bulb -- smooth rounded teardrop, no fork
+        var lastPt = pts[pts.length - 1];
+        var bulbR = w * 0.6 + Math.random() * 2;
+        var bulbY = h - bulbR;
+        // Arc from left side down around the bottom and back up to right side
+        d += 'C' + lastPt.xl + ',' + (bulbY) + ' ' + (hw - bulbR) + ',' + (h) + ' ' + hw + ',' + (h) + ' ';
+        d += 'C' + (hw + bulbR) + ',' + (h) + ' ' + lastPt.xr + ',' + (bulbY) + ' ' + lastPt.xr + ',' + lastPt.y + ' ';
         // Right side going up
         for (var k = pts.length - 2; k >= 0; k--) {
           var cpY2 = (pts[k+1].y + pts[k].y) / 2;
