@@ -1,12 +1,12 @@
 /* ============================================================
-   ELITE CUTS STUDIO - AUTO LANGUAGE SWITCH
+   FUEGO FADES BARBERSHOP - AUTO LANGUAGE SWITCH
    Detects browser language, auto-swaps to Spanish if es-*.
    No visible toggle -- fully automatic.
    ============================================================ */
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'ecs-lang';
+  var STORAGE_KEY = 'ff-lang';
 
   function getPreferred() {
     var saved = localStorage.getItem(STORAGE_KEY);
